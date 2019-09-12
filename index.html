@@ -3,41 +3,56 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <link href="https://fonts.googleapis.com/css?family=Modak&display=swap" rel="stylesheet">
   <title>It's Always Sunny</title>
 </head>
 
 <body>
-  <div id="buttons">
-    <button data-person="Charlie Kelly">
+    
+    <div>
+    <button class="oldButton" id= "oldData" data-person="Charlie Kelly">
       Charlie Kelly
     </button>
 
-    <button data-person="Mac">
-      Ronald Macdonald
+    <button class="oldButton" data-person="rob mcelhenney">
+      Mac
     </button>
 
-    <button data-person="Dennis Reynolds">
+    <button class="oldButton" data-person="Dennis Reynolds">
       Dennis Reynolds
     </button>
 
-    <button data-person="Deandra Reynolds">
+    <button class="oldButton" data-person="Deandra Reynolds">
       Deandra Reynolds
     </button>
 
-    <button data-person="Frank Reynolds">
+    <button class="oldButton" data-person="Frank Reynolds">
       Frank Reynolds
     </button>
 
+<div id= "displayDiv">
+
+</div>
+
+  </div>
+
+  <div id="inputGif">
+      <button id="addButton">Add to Trash Can: </button>
+
+      <input type="text" id="buttonTitle" name="name" required
+             minlength="8" maxlength="12" size="10">
   </div>
 
   <div id="gifs-appear-here">
+  
+        
   </div>
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript">
-    $("button").on("click", function() {
+    $(".oldButton").on("click", function() {
       var person = $(this).attr("data-person");
       var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
         person + "&api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&limit=10";
@@ -68,7 +83,7 @@
 
             $("#gifs-appear-here").prepend(gifDiv);
 
-            var personDiv = ($div)
+            var personDiv = $('<div>')
             var p = $('<p>')
             p.text(results[i].rating);
             var personImage = $("<img>");
@@ -76,14 +91,37 @@
             personDiv.append(personImage);
             
 
+
           }
 
 
        
         });
+        
     });
 
+    $("#addButton").on("click", function() {
+      var newButton = $('<button>')
+      var inputValue =$("#buttonTitle").val()
+      newButton.text(inputValue)
+      $("#displayDiv").append(newButton)
+  
+    });
 
+    $(".gif").on("click", function() {
+   var state = $(this).attr("data-state");
+   if(state==="still"){
+        var animatedSrc = $(this).attr("data-animate");
+        $(this).attr('src',(this).attr("data-animate"));
+        $(this).attr('data-state','animate')
+
+      }
+      else{
+        var stillSrc = $(this).attr("data-still");
+        $(this).attr('src',$(this).attr("data-still"));
+        $(this).attr('data-state','still') 
+      }
+    });
   </script>
 </body>
 

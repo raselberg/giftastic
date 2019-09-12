@@ -1,0 +1,13 @@
+button{
+  background-color: gold;
+  border: none;
+  color: black;
+
+  text-align: center;
+  font-size: 22px;
+  font-family: 'Modak', cursive;
+}
+
+#buttons{
+  background-color: gold;
+}
